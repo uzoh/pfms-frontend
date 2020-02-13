@@ -65,7 +65,7 @@ const RightSide = props => {
     >
       <div className="inner-container">
         {console.log(props.current)}
-        <div className="text"></div>
+        <div className="text">{props.current}</div>
       </div>
     </div>
   );
