@@ -1,7 +1,7 @@
 import axios from "axios";
 
-//axios.defaults.baseURL = 'https://kingsmen-ah-backend-staging.herokuapp.com/api/v1';
-axios.defaults.baseURL = "http://localhost:5000/api/v1";
+axios.defaults.baseURL = "https://pfms-backend.herokuapp.com/api/v1/";
+// axios.defaults.baseURL = "http://localhost:5000/api/v1";
 
 export const setAuthToken = token => {
   if (token) {
