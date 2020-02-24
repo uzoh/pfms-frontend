@@ -2,10 +2,16 @@ import React from "react";
 import logo from "../../logo.svg";
 import "./App.scss";
 import { Login, Register } from "../auth";
+import { isLoggedIn } from "./HomePage";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+
+    if (isLoggedIn()) {
+      window.location.href = "/home";
+    }
+
     this.state = {
       isLogginActive: true
     };
@@ -64,7 +70,6 @@ const RightSide = props => {
       onClick={props.onClick}
     >
       <div className="inner-container">
-        {console.log(props.current)}
         <div className="text">{props.current}</div>
       </div>
     </div>
