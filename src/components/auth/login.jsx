@@ -7,6 +7,7 @@ export class Login extends React.Component {
   }
 
   render() {
+    const { changeState } = this.props;
     return (
       <div className="base-container" ref={this.props.containerRef}>
         <div className="header">Login</div>
@@ -24,6 +25,12 @@ export class Login extends React.Component {
               <input type="password" name="password" placeholder="password" />
             </div>
           </div>
+        </div>
+        <div>
+          Don't have an account?{" "}
+          <span className="text-blue-500 pointer" onClick={changeState}>
+            Register
+          </span>
         </div>
         <div className="footer">
           <button type="button" className="btn">

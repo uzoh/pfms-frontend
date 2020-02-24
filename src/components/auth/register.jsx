@@ -7,6 +7,7 @@ export class Register extends React.Component {
   }
 
   render() {
+    const { changeState } = this.props;
     return (
       <div className="base-container" ref={this.props.containerRef}>
         <div className="header">Register</div>
@@ -29,7 +30,13 @@ export class Register extends React.Component {
             </div>
           </div>
         </div>
-        <div className="footer">
+        <div>
+          Already have an account?{" "}
+          <span className="text-blue-500 pointer" onClick={changeState}>
+            Login
+          </span>
+        </div>
+        <div className="">
           <button type="button" className="btn">
             Register
           </button>
