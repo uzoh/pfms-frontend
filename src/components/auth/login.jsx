@@ -88,7 +88,7 @@ export class Login extends React.Component {
                 </span>
               </div>
               <div className="footer">
-                <button type="submit" className="btn">
+                <button type="submit" className="btn" disabled={isLoading}>
                   {isLoading ? "Loading..." : "Login"}
                 </button>
               </div>
