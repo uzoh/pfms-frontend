@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import NavBar from "../commons/NavBar";
 
 export const isLoggedIn = () => {
   const token = localStorage.getItem("jwtToken");
@@ -16,7 +17,11 @@ class HomePage extends Component {
   }
 
   render() {
-    return <div>WELCOME TO THE HOME PAGE</div>;
+    return (
+      <div>
+        <NavBar />
+      </div>
+    );
   }
 }
 
