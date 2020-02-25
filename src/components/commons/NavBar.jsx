@@ -29,6 +29,7 @@ class NavBar extends Component {
 
   render() {
     const { searchActive, navbarActive } = this.state;
+    const { searchTextChanged } = this.props;
     return (
       <nav id="header" className="fixed w-full">
         <div className="relative w-full z-10 fixed top-0 bg-gray-200 border-b border-grey-light">
@@ -139,6 +140,7 @@ class NavBar extends Component {
               type="search"
               placeholder="Search for Pensioner..."
               autoFocus
+              onChange={searchTextChanged}
               className="w-full text-grey-800 transition focus:outline-none focus:border-transparent p-2 appearance-none leading-normal text-xl lg:text-2xl"
             />
           </div>

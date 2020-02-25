@@ -22,7 +22,8 @@ class HomePage extends Component {
 
     this.state = {
       pensioners: [],
-      isLoading: true
+      isLoading: true,
+      searchText: ""
     };
     this.getAllPensioners();
   }
@@ -32,23 +33,34 @@ class HomePage extends Component {
     this.setState({ pensioners, isLoading: false });
   };
 
-  render() {
-    const { pensioners, isLoading } = this.state;
+  textChanged = e => {
+    this.setState({ searchText: e.target.value });
+  };
 
-    const pensionersCards = pensioners.map(pensioner => (
-      <PensionerCard
-        id={pensioner.id}
-        email={pensioner.email}
-        fullname={pensioner.fullname}
-        profileImage={pensioner.profileImage}
-      />
-    ));
+  render() {
+    const { pensioners, isLoading, searchText } = this.state;
+
+    const pensionersCards = pensioners
+      .map(pensioner => (
+        <PensionerCard
+          id={pensioner.id}
+          email={pensioner.email}
+          fullname={pensioner.fullname}
+          profileImage={pensioner.profileImage}
+        />
+      ))
+      .filter(pensioner => {
+        return (
+          pensioner.props.fullname.includes(searchText) ||
+          pensioner.props.email.includes(searchText)
+        );
+      });
 
     return (
       <div>
         <div className="bg-gray-100 font-sans w-full min-h-screen m-0">
           <div className="bg-gray-100 font-sans leading-normal tracking-normal">
-            <NavBar />
+            <NavBar searchTextChanged={this.textChanged} />
             {isLoading ? (
               <Preloader
                 type="page"
