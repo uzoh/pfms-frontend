@@ -71,6 +71,12 @@ class AuthClient {
       }
     }
   };
+
+  static logout = data => {
+    localStorage.removeItem("jwtToken");
+    window.location.href = "/";
+    setAuthToken();
+  };
 }
 
 export default AuthClient;

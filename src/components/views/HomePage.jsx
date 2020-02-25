@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import AuthClient from "../../networks/auth";
 
 export const isLoggedIn = () => {
   const token = localStorage.getItem("jwtToken");
@@ -14,9 +15,24 @@ class HomePage extends Component {
       window.location.href = "/";
     }
   }
+  logout = () => {
+    AuthClient.logout();
+  };
 
   render() {
-    return <div>WELCOME TO THE HOME PAGE</div>;
+    let name = "Uzoh";
+    return (
+      <div>
+        <button
+          className="text-blue-500 pointer"
+          id="logout"
+          onClick={this.logout}
+        >
+          Logout
+        </button>
+        WELCOME TO THE HOME PAGE
+      </div>
+    );
   }
 }
 
