@@ -17,7 +17,7 @@ class App extends React.Component {
     };
   }
 
-  changeState() {
+  changeState = () => {
     const { isLogginActive } = this.state;
     if (isLogginActive) {
       this.rightSide.classList.remove("right");
@@ -28,12 +28,11 @@ class App extends React.Component {
     }
 
     this.setState(prevState => ({ isLogginActive: !prevState.isLogginActive }));
-  }
+  };
 
   render() {
     const { isLogginActive } = this.state;
     const current = isLogginActive ? "Register" : "Login";
-    const currentActive = isLogginActive ? "login" : "register";
 
     return (
       <React.Fragment>
@@ -44,16 +43,22 @@ class App extends React.Component {
           <div className="login">
             <div className="container">
               {isLogginActive && (
-                <Login containerRef={ref => (this.current = ref)} />
+                <Login
+                  containerRef={ref => (this.current = ref)}
+                  changeState={this.changeState}
+                />
               )}
               {!isLogginActive && (
-                <Register containerRef={ref => (this.current = ref)} />
+                <Register
+                  containerRef={ref => (this.current = ref)}
+                  changeState={this.changeState}
+                />
               )}
             </div>
             <RightSide
               current={current}
               containerRef={ref => (this.rightSide = ref)}
-              onClick={this.changeState.bind(this)}
+              onClick={this.changeState}
             />
           </div>
         </div>

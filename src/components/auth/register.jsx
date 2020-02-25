@@ -46,6 +46,7 @@ export class Register extends React.Component {
   };
 
   render() {
+    const { changeState } = this.props;
     const { isLoading, errors, isLoggedIn } = this.state;
 
     return (
@@ -55,10 +56,10 @@ export class Register extends React.Component {
         ) : (
           <form onSubmit={this.registerPress}>
             <div className="base-container" ref={this.props.containerRef}>
-              <div className="header mt-10">Register</div>
+              <div className="header">Register</div>
               <div className="content">
                 <div className="image">
-                  <img src={loginImg} />
+                  <img src={loginImg} alt="registration" />
                 </div>
                 <div className="form">
                   <FormInput
@@ -89,7 +90,13 @@ export class Register extends React.Component {
                   />
                 </div>
               </div>
-              <div className="footer">
+              <div>
+                Already have an account?{" "}
+                <span className="text-blue-500 pointer" onClick={changeState}>
+                  Login
+                </span>
+              </div>
+              <div className="mt-2">
                 <button
                   type="submit"
                   className="btn"
