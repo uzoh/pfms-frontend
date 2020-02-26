@@ -29,9 +29,9 @@ class NavBar extends Component {
 
   render() {
     const { searchActive, navbarActive } = this.state;
-    const { searchTextChanged } = this.props;
+    const { searchTextChanged, currentPage, showSearch } = this.props;
     return (
-      <nav id="header" className="fixed w-full">
+      <nav id="header" className="fixed w-full z-50">
         <div className="relative w-full z-10 fixed top-0 bg-gray-200 border-b border-grey-light">
           <div className="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-4">
             <div className="pl-4 flex items-center">
@@ -48,19 +48,21 @@ class NavBar extends Component {
               >
                 PFMS
               </Link>
-              <div
-                id="search-toggle"
-                className="search-icon cursor-pointer pl-6"
-                onClick={this.toggleSearchBar}
-              >
-                <svg
-                  className="fill-current pointer-events-none text-grey-darkest w-4 h-4 inline"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
+              {showSearch && (
+                <div
+                  id="search-toggle"
+                  className="search-icon cursor-pointer pl-6"
+                  onClick={this.toggleSearchBar}
                 >
-                  <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
-                </svg>
-              </div>
+                  <svg
+                    className="fill-current pointer-events-none text-grey-darkest w-4 h-4 inline"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
+                  </svg>
+                </div>
+              )}
             </div>
 
             <div className="pr-4">
@@ -94,7 +96,12 @@ class NavBar extends Component {
                 <li className="mr-3 py-2 lg:py-0">
                   <Link
                     to="/new-pensioner"
-                    className="text-gray-800 text-sm font-semibold hover:text-blue-600 mr-4"
+                    className={classNames(
+                      "text-gray-800 text-sm font-semibold hover:text-blue-600 mr-4",
+                      {
+                        "text-blue-600": currentPage === 1
+                      }
+                    )}
                   >
                     New Pensioner
                   </Link>
@@ -102,7 +109,12 @@ class NavBar extends Component {
                 <li className="mr-3 py-2 lg:py-0">
                   <Link
                     to="/payment"
-                    className="text-gray-800 text-sm font-semibold hover:text-blue-600 mr-4"
+                    className={classNames(
+                      "text-gray-800 text-sm font-semibold hover:text-blue-600 mr-4",
+                      {
+                        "text-blue-600": currentPage === 2
+                      }
+                    )}
                   >
                     Payment
                   </Link>
@@ -110,7 +122,12 @@ class NavBar extends Component {
                 <li className="mr-3 py-2 lg:py-0">
                   <Link
                     to="/clearance"
-                    className="text-gray-800 text-sm font-semibold hover:text-blue-600 mr-4"
+                    className={classNames(
+                      "text-gray-800 text-sm font-semibold hover:text-blue-600 mr-4",
+                      {
+                        "text-blue-600": currentPage === 3
+                      }
+                    )}
                   >
                     Clearance
                   </Link>
