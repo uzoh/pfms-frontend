@@ -14,7 +14,9 @@ const PensionerCard = props => {
             alt="pensioner profile"
           />
         </div>
-        <h2 className="text-xl font-medium text-gray-700">{fullname}</h2>
+        <h2 className="text-xl font-medium text-gray-700">
+          {fullname.toUpperCase()}
+        </h2>
         <span className="text-blue-500 block mb-5">{email}</span>
 
         <Link

@@ -60,7 +60,11 @@ class HomePage extends Component {
       <div>
         <div className="bg-gray-100 font-sans w-full min-h-screen m-0">
           <div className="bg-gray-100 font-sans leading-normal tracking-normal">
-            <NavBar searchTextChanged={this.textChanged} />
+            <NavBar
+              searchTextChanged={this.textChanged}
+              currentPage={0}
+              showSearch={true}
+            />
             {isLoading ? (
               <Preloader
                 type="page"
