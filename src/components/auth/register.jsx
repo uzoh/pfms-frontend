@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { toast } from "react-toastify";
 import { Redirect } from "react-router-dom";
-import loginImg from "../../login.svg";
+import loginImg from "../../images/login.svg";
 import AuthClient from "../../networks/auth";
 import FormInput from "../commons/FormInput";
 

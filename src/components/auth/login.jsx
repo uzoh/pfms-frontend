@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { toast } from "react-toastify";
 import { Redirect } from "react-router-dom";
 import AuthClient from "../../networks/auth";
-import loginImg from "../../login.svg";
+import loginImg from "../../images/login.svg";
 import FormInput from "../commons/FormInput";
 
 export class Login extends React.Component {

@@ -2,8 +2,11 @@ import React, { Component, Fragment } from "react";
 
 class FormImage extends Component {
   render() {
-    const { name, imageUrl, onChange, error } = this.props;
-    console.log(imageUrl);
+    const { name, onChange, error, value } = this.props;
+    let imageUrl = value;
+    if (value.name) {
+      imageUrl = URL.createObjectURL(value);
+    }
     return (
       <Fragment>
         <img

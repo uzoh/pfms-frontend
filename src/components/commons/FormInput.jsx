@@ -2,7 +2,15 @@ import React, { Component } from "react";
 
 class FormInput extends Component {
   render() {
-    const { type, name, title, placeholder, onChange, error } = this.props;
+    const {
+      type,
+      name,
+      title,
+      placeholder,
+      onChange,
+      error,
+      value
+    } = this.props;
     return (
       <div className="form-group mb-2">
         <label htmlFor="fullname">{title}</label>
@@ -11,6 +19,7 @@ class FormInput extends Component {
           name={name}
           placeholder={placeholder}
           onChange={onChange}
+          value={value || ""}
           required
         />
         {error && (
