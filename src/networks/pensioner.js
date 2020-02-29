@@ -108,6 +108,23 @@ class PensionerClient {
       }
     }
   };
+
+  static deletePensioner = async pensionerId => {
+    try {
+      const res = await axios.delete(`/pensioners/${pensionerId}`);
+      return res.data.payload;
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status == 401) {
+          // the user's token has expired, redirect to login page
+          localStorage.removeItem("jwtToken");
+          window.location.href = "/";
+        }
+        const errors = error.response.data.errors;
+        return { errors };
+      }
+    }
+  };
 }
 
 export default PensionerClient;

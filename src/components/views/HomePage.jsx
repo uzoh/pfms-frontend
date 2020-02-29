@@ -37,6 +37,14 @@ class HomePage extends Component {
     this.setState({ searchText: e.target.value });
   };
 
+  deletePensionerFromList = id => {
+    const newPensioners = this.state.pensioners.filter(
+      pensioner => pensioner.id !== id
+    );
+
+    this.setState({ pensioners: newPensioners });
+  };
+
   render() {
     const { pensioners, isLoading, searchText } = this.state;
 
@@ -47,6 +55,7 @@ class HomePage extends Component {
           email={pensioner.email}
           fullname={pensioner.fullname}
           profileImage={pensioner.profileImage}
+          removePensionerFromList={this.deletePensionerFromList}
         />
       ))
       .filter(pensioner => {
