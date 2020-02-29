@@ -47,7 +47,14 @@ export class Register extends React.Component {
 
   render() {
     const { changeState } = this.props;
-    const { isLoading, errors, isLoggedIn } = this.state;
+    const {
+      isLoading,
+      errors,
+      isLoggedIn,
+      fullname,
+      email,
+      password
+    } = this.state;
 
     return (
       <Fragment>
@@ -69,6 +76,7 @@ export class Register extends React.Component {
                     onChange={this.textChanged}
                     error={errors.fullname}
                     type="text"
+                    value={fullname}
                   />
 
                   <FormInput
@@ -78,6 +86,7 @@ export class Register extends React.Component {
                     onChange={this.textChanged}
                     error={errors.email}
                     type="email"
+                    value={email}
                   />
 
                   <FormInput
@@ -87,6 +96,7 @@ export class Register extends React.Component {
                     onChange={this.textChanged}
                     error={errors.password}
                     type="password"
+                    value={password}
                   />
                 </div>
               </div>
