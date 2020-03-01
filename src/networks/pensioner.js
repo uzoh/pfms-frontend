@@ -65,6 +65,66 @@ class PensionerClient {
       }
     }
   };
+
+  static updatePensioner = async (pensioner, profileImageChanged) => {
+    try {
+      if (profileImageChanged) {
+        const profileImageUrl = await uploadImage(pensioner.profileImage);
+
+        if (profileImageUrl === "")
+          return { errors: { global: "Error uploading Image" } };
+
+        pensioner.profileImage = profileImageUrl;
+      }
+
+      await axios.put(`/pensioners/${pensioner.id}`, pensioner);
+      return { message: "Success" };
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status == 401) {
+          // the user's token has expired, redirect to login page
+          localStorage.removeItem("jwtToken");
+          window.location.href = "/";
+        }
+        const errors = error.response.data.errors;
+        return { errors };
+      }
+    }
+  };
+
+  static fetchSinglePensioner = async pensionerId => {
+    try {
+      const res = await axios.get(`/pensioners/${pensionerId}`);
+      return res.data.payload;
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status == 401) {
+          // the user's token has expired, redirect to login page
+          localStorage.removeItem("jwtToken");
+          window.location.href = "/";
+        }
+        const errors = error.response.data.errors;
+        return { errors };
+      }
+    }
+  };
+
+  static deletePensioner = async pensionerId => {
+    try {
+      const res = await axios.delete(`/pensioners/${pensionerId}`);
+      return res.data.payload;
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status == 401) {
+          // the user's token has expired, redirect to login page
+          localStorage.removeItem("jwtToken");
+          window.location.href = "/";
+        }
+        const errors = error.response.data.errors;
+        return { errors };
+      }
+    }
+  };
 }
 
 export default PensionerClient;

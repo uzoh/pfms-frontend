@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { toast } from "react-toastify";
 import { Redirect } from "react-router-dom";
 import AuthClient from "../../networks/auth";
-import loginImg from "../../login.svg";
+import loginImg from "../../images/login.svg";
 import FormInput from "../commons/FormInput";
 
 export class Login extends React.Component {
@@ -47,7 +47,7 @@ export class Login extends React.Component {
 
   render() {
     const { changeState } = this.props;
-    const { isLoggedIn, errors, isLoading } = this.state;
+    const { isLoggedIn, errors, isLoading, email, password } = this.state;
     return (
       <Fragment>
         {isLoggedIn ? (
@@ -69,6 +69,7 @@ export class Login extends React.Component {
                     onChange={this.textChanged}
                     error={errors.email}
                     type="email"
+                    value={email}
                   />
 
                   <FormInput
@@ -78,6 +79,7 @@ export class Login extends React.Component {
                     onChange={this.textChanged}
                     error={errors.password}
                     type="password"
+                    value={password}
                   />
                 </div>
               </div>
