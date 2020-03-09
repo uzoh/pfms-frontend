@@ -4,6 +4,7 @@ import NotFound from "../views/NotFound";
 import Login from "../views/Login";
 import HomePage from "../views/HomePage";
 import PensionerForm from "../views/PensionerForm";
+import Clearance from "../views/Clearance";
 
 const Routes = () => (
   <Router>
@@ -16,6 +17,7 @@ const Routes = () => (
         path="/edit-pensioner/:pensionerID"
         component={PensionerForm}
       />
+      <Route exact path="/clearance" component={Clearance} />
       <Route path="/" component={NotFound} />
     </Switch>
   </Router>
