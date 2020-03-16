@@ -4,6 +4,7 @@ import NavBar from "../commons/NavBar";
 import { isLoggedIn } from "../views/HomePage";
 import FormInput from "../commons/FormInput";
 import ClearanceClient from "../../networks/clearance";
+import Preloader from "../commons/Preloader";
 
 class HomePage extends Component {
   constructor(props) {
@@ -13,9 +14,14 @@ class HomePage extends Component {
       isLoggedIn: isLoggedIn(),
       errors: {},
       email: "",
-      isLoading: false,
-      imageUrl: ""
+      isLoading: true,
+      imageUrl: "",
+      clearances: []
     };
+
+    if (this.state.isLoggedIn) {
+      this.fetchPendingClearance();
+    }
 
     this.widget = window.cloudinary.createUploadWidget(
       {
@@ -27,6 +33,11 @@ class HomePage extends Component {
       }
     );
   }
+
+  fetchPendingClearance = async () => {
+    const clearances = await ClearanceClient.fetchPendingClearance();
+    this.setState({ ...this.state, clearances, isLoading: false });
+  };
 
   checkUploadResult = resultEvent => {
     if (resultEvent.event === "success") {
@@ -71,8 +82,102 @@ class HomePage extends Component {
     this.setState({ isLoading: false });
   };
 
+  approveClearance = async ({ pensionerID }) => {
+    this.setState({ isLoading: true });
+    const res = await ClearanceClient.approveClearance(pensionerID);
+
+    this.setState({ isLoading: false });
+    const errors = res.errors;
+    if (errors) {
+      if (errors.global) {
+        toast.error(errors.global);
+      }
+    } else {
+      toast.success("Clearance Approved");
+      window.location.reload();
+    }
+  };
+
+  declineClearance = async ({ pensionerID }) => {
+    this.setState({ isLoading: true });
+    const res = await ClearanceClient.declineClearance(pensionerID);
+
+    this.setState({ isLoading: false });
+    const errors = res.errors;
+    if (errors) {
+      if (errors.global) {
+        toast.error(errors.global);
+      }
+    } else {
+      toast.success("Clearance Declined");
+      window.location.reload();
+    }
+  };
+
+  constructClearanceCell = (clearance, index) => {
+    const { picture, Pensioner } = clearance;
+    const { fullname, profileImage } = Pensioner;
+    return (
+      <div className="bg-gray-300 block w-full m-2 p-2 rounded shadow pointer hover:bg-gray-400 flex items-center">
+        <div className="ml-2">{index}.</div>
+        <img
+          src={profileImage}
+          alt="pensioner"
+          className="w-8 h-8 rounded-full ml-4"
+        />
+        <div
+          className="w-full ml-4"
+          onClick={() => {
+            this.showFullPicture(picture);
+          }}
+        >
+          {fullname.toUpperCase()}
+        </div>
+        <button
+          className="bg-green-500 p-2 rounded hover:bg-green-600 mr-4"
+          onClick={() => {
+            this.approveClearance(clearance);
+          }}
+        >
+          Approve
+        </button>
+        <button
+          className="bg-red-500 p-2 rounded hover:bg-red-600"
+          onClick={() => {
+            this.declineClearance(clearance);
+          }}
+        >
+          Decline
+        </button>
+      </div>
+    );
+  };
+
+  showFullPicture = picture => {
+    window.open(picture, "_blank");
+  };
+
   render() {
-    const { isLoggedIn, errors, email, isLoading, imageUrl } = this.state;
+    const {
+      isLoggedIn,
+      errors,
+      email,
+      isLoading,
+      imageUrl,
+      clearances
+    } = this.state;
+
+    let clearanceCells = clearances.map((clearance, index) =>
+      this.constructClearanceCell(clearance, index + 1)
+    );
+
+    if (clearanceCells.length === 0) {
+      clearanceCells = (
+        <div className="text-gray-500 text-center w-full">
+          There are no pending clearance submissions
+        </div>
+      );
+    }
 
     return (
       <div className={!isLoggedIn && "bg-blue-600"}>
@@ -87,7 +192,17 @@ class HomePage extends Component {
                 />
                 <div className="pt-24 container mx-auto">
                   <div className="flex flex-col sm:flex-row flex-wrap">
-                    You are logged in
+                    {isLoading ? (
+                      <Preloader
+                        type="page"
+                        styles="ThreeDots"
+                        width={80}
+                        height={80}
+                        color="blue"
+                      />
+                    ) : (
+                      clearanceCells
+                    )}
                   </div>
                 </div>
               </Fragment>
