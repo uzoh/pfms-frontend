@@ -108,19 +108,6 @@ class NavBar extends Component {
                 </li>
                 <li className="mr-3 py-2 lg:py-0">
                   <Link
-                    to="/payment"
-                    className={classNames(
-                      "text-gray-800 text-sm font-semibold hover:text-blue-600 mr-4",
-                      {
-                        "text-blue-600": currentPage === 2
-                      }
-                    )}
-                  >
-                    Payment
-                  </Link>
-                </li>
-                <li className="mr-3 py-2 lg:py-0">
-                  <Link
                     to="/clearance"
                     className={classNames(
                       "text-gray-800 text-sm font-semibold hover:text-blue-600 mr-4",
@@ -130,6 +117,19 @@ class NavBar extends Component {
                     )}
                   >
                     Clearance
+                  </Link>
+                </li>
+                <li className="mr-3 py-2 lg:py-0">
+                  <Link
+                    to="/payment"
+                    className={classNames(
+                      "text-gray-800 text-sm font-semibold hover:text-blue-600 mr-4",
+                      {
+                        "text-blue-600": currentPage === 2
+                      }
+                    )}
+                  >
+                    Payment
                   </Link>
                 </li>
                 <li className="mr3 py-2 lg:py-0">

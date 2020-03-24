@@ -10,7 +10,7 @@ class HomePage extends Component {
   constructor(props) {
     super(props);
 
-    const loggedIn = isLoggedIn()
+    const loggedIn = isLoggedIn();
     this.state = {
       isLoggedIn: loggedIn,
       errors: {},
@@ -204,7 +204,7 @@ class HomePage extends Component {
                 </div>
               </Fragment>
             ) : (
-              <div className="container">
+              <div className="container mx-auto">
                 <div className="text-white text-center text-3xl p-8 font-bold">
                   Pension Funds Management System
                 </div>
