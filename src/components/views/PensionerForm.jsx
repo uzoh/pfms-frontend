@@ -234,7 +234,9 @@ class PensionerForm extends Component {
                     "Stanbic IBTC",
                     "First Bank",
                     "FCMB",
-                    "Fidelity"
+                    "Fidelity",
+                    "Zenith",
+                    "Access(Diamond)"
                   ]}
                   value={bank}
                 />
