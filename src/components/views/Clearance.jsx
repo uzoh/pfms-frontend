@@ -10,11 +10,12 @@ class HomePage extends Component {
   constructor(props) {
     super(props);
 
+    const loggedIn = isLoggedIn()
     this.state = {
-      isLoggedIn: isLoggedIn(),
+      isLoggedIn: loggedIn,
       errors: {},
       email: "",
-      isLoading: true,
+      isLoading: loggedIn,
       imageUrl: "",
       clearances: []
     };
