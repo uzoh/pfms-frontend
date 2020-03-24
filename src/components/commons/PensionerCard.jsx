@@ -54,7 +54,15 @@ class PensionerCard extends Component {
   };
 
   render() {
-    const { profileImage, fullname, email, id } = this.props;
+    const {
+      profileImage,
+      fullname,
+      email,
+      id,
+      showMenuBtn,
+      btnText,
+      cardClicked
+    } = this.props;
     const { isLoading } = this.state;
 
     return (
@@ -63,11 +71,14 @@ class PensionerCard extends Component {
           "opacity-50": isLoading
         })}
       >
-        <img
-          src={menuImage}
-          alt="Menu button"
-          className="absolute right-0 top-0 mr-2 mt-4 w-8 pointer menu-btn"
-        />
+        {showMenuBtn && (
+          <img
+            src={menuImage}
+            alt="Menu button"
+            className="absolute right-0 top-0 mr-2 mt-4 w-8 pointer menu-btn"
+          />
+        )}
+
         <div className="w-20 text-center shadow rounded pointer absolute position-right right-0 bg-white top-0 mt-12 tooltip hidden">
           <Link to={`/edit-pensioner/${id}`}>
             <div className="hover:bg-gray-300 p-2">Edit</div>
@@ -81,7 +92,24 @@ class PensionerCard extends Component {
             Delete
           </div>
         </div>
-        <div className="bg-white px-6 py-8 rounded-lg shadow-lg text-center">
+        <div
+          className={classNames(
+            "bg-white px-6 py-8 rounded-lg shadow-lg text-center",
+            {
+              pointer: cardClicked
+            }
+          )}
+          onClick={() => {
+            if (cardClicked) {
+              cardClicked({
+                profileImage,
+                fullname,
+                email,
+                id
+              });
+            }
+          }}
+        >
           <div className="mb-3">
             <img
               className="w-auto mx-auto rounded-full h-40"
@@ -93,13 +121,14 @@ class PensionerCard extends Component {
             {fullname.toUpperCase()}
           </h2>
           <span className="text-blue-500 block mb-5">{email}</span>
-
-          <Link
-            to={`pensioner/${id}`}
-            className="px-4 py-2 bg-blue-500 text-white rounded-full"
-          >
-            Show More
-          </Link>
+          {btnText && btnText !== "" && (
+            <Link
+              to={`pensioner/${id}`}
+              className="px-4 py-2 bg-blue-500 text-white rounded-full"
+            >
+              {btnText}
+            </Link>
+          )}
         </div>
       </div>
     );

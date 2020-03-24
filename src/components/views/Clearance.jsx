@@ -185,11 +185,7 @@ class HomePage extends Component {
           <div className="font-sans leading-normal tracking-normal">
             {isLoggedIn ? (
               <Fragment>
-                <NavBar
-                  searchTextChanged={this.textChanged}
-                  currentPage={0}
-                  showSearch={true}
-                />
+                <NavBar currentPage={3} showSearch={false} />
                 <div className="pt-24 container mx-auto">
                   <div className="flex flex-col sm:flex-row flex-wrap">
                     {isLoading ? (

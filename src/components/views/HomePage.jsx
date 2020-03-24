@@ -56,6 +56,8 @@ class HomePage extends Component {
           fullname={pensioner.fullname}
           profileImage={pensioner.profileImage}
           removePensionerFromList={this.deletePensionerFromList}
+          btnText="Show More"
+          showMenuBtn
         />
       ))
       .filter(pensioner => {
