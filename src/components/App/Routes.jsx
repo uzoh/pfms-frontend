@@ -6,6 +6,7 @@ import HomePage from "../views/HomePage";
 import PensionerForm from "../views/PensionerForm";
 import Clearance from "../views/Clearance";
 import Payment from "../views/Payment";
+import SinglePensioner from "../views/SinglePensioner";
 
 const Routes = () => (
   <Router>
@@ -20,6 +21,7 @@ const Routes = () => (
       />
       <Route exact path="/clearance" component={Clearance} />
       <Route exact path="/payment" component={Payment} />
+      <Route exact path="/pensioner/:pensionerID" component={SinglePensioner} />
       <Route path="/" component={NotFound} />
     </Switch>
   </Router>

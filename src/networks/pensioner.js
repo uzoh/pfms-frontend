@@ -161,6 +161,44 @@ class PensionerClient {
       }
     }
   };
+
+  static getSpecificPensioner = async pensionerID => {
+    try {
+      const res = await axios.get(`/pensioners/${pensionerID}`);
+      return res.data.payload;
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status === 401) {
+          // the user's token has expired, redirect to login page
+          localStorage.removeItem("jwtToken");
+          window.location.href = "/";
+        } else if (error.response.status === 404) {
+          window.location.href = "/not-found";
+        }
+        const errors = error.response.data.errors;
+        return { errors };
+      }
+    }
+  };
+
+  static getPaymentHistory = async pensionerID => {
+    try {
+      const res = await axios.get(`/pensioners/${pensionerID}/history`);
+      return res.data.payload;
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status === 401) {
+          // the user's token has expired, redirect to login page
+          localStorage.removeItem("jwtToken");
+          window.location.href = "/";
+        } else if (error.response.status === 404) {
+          window.location.href = "/not-found";
+        }
+        const errors = error.response.data.errors;
+        return { errors };
+      }
+    }
+  };
 }
 
 export default PensionerClient;
